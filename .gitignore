@@ -1,0 +1,5 @@
+data/
+outputs/
+.idea/
+__pycache__/
+*.pyc
