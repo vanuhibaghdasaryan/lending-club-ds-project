@@ -99,7 +99,8 @@ def plot_default_by_income_quantile(df):
     df = df.copy()
     df["income_q"] = pd.qcut(df["annual_inc"], 5)
 
-    rates = df.groupby("income_q")["default"].mean()
+    rates = df.groupby("income_q", observed=False)["default"].mean()
+
 
     plt.figure()
     rates.plot(kind="bar")
