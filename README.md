@@ -23,13 +23,54 @@ Specifically, the project:
 Source: Kaggle  
 https://www.kaggle.com/datasets/adarshsng/lending-club-loan-data-csv
 
-The dataset contains loan-level information including loan amount, interest rate, borrower characteristics, loan status, and repayment outcomes.
+The dataset contains loan-level information such as:
+- Loan amount and interest rate  
+- Loan issue date  
+- Loan status (e.g. Fully Paid, Charged Off)  
+- Borrower income, debt-to-income ratio  
+- Employment length  
+- Loan grade and purpose 
 
 
 The dataset is not included in this repository due to its size.  
 Please download the CSV file from Kaggle and place it in the `data/` directory.
 
 ---
+
+## Methodology Overview
+
+1. **Data Loading**  
+   The raw Lending Club CSV file is loaded from the `data/` directory.
+
+2. **Data Cleaning & Preprocessing**
+   - Parse loan issue dates
+   - Convert loan status into a binary default indicator
+   - Parse employment length
+   - Remove invalid or incomplete observations
+
+3. **Descriptive Analysis**
+   - Monthly loan issuance volume
+   - Monthly default rates
+   - Aggregations by loan grade and loan purpose
+   - Loan amount and income-based analyses
+
+4. **Anomaly Detection**
+   - Identify months with unusually high default rates
+   - Anomalies are detected using a z-score–based rule
+
+5. **Predictive Modeling**
+   - Logistic regression model
+   - Predicts probability of loan default
+   - Model performance evaluated using ROC-AUC
+
+6. **Visualization**
+   - Time series plots
+   - Bar charts by grade and purpose
+   - Heatmap of default rates (grade × purpose)
+   - Anomaly-highlighted default rate plot
+
+---
+
 ## Usage
 
 1. **Clone the repository**
@@ -47,12 +88,63 @@ Please download the CSV file from Kaggle and place it in the `data/` directory.
 - Rename the downloaded CSV file to `loan.csv`
 - Place the file inside the `data/` directory
 
-4. **Navigate to the project directory**
+4. **Install dependencies**
    ```bash
    pip install -r requirements.txt
 
 4. **Run the analysis**
    ```bash
    python main.py
+   
+
+---
+
+## Outputs
+
+After running `main.py`, the following outputs are automatically generated.
+
+### Processed Data
+
+- **`outputs/processed/monthly.csv`**  
+  Monthly loan counts, average loan amounts, default rates, and anomaly flags.
+
+- **`outputs/processed/grade_purpose.csv`**  
+  Aggregated loan counts and default rates by loan grade and loan purpose.
+
+---
+
+### Plots
+
+Saved in **`outputs/plots/`**, including:
+
+- Loan issuance over time  
+- Default rate over time  
+- Loan issuance vs default rate  
+- Default rate by loan grade  
+- Default rate by loan purpose  
+- Default rate heatmap (grade × purpose)  
+- Default rate with anomalies highlighted  
+- Loan amount distribution by default status  
+- Default rate by income quantile  
+
+---
+
+### Model Results
+
+- **`outputs/reports/model_results.txt`**  
+  Contains the ROC-AUC score of the logistic regression model used to predict loan default.
+
+---
+
+## Notes & Extensions
+
+This project uses a **baseline modeling approach** and a simple anomaly detection method for clarity and interpretability.
+
+Possible extensions include:
+- Time-based train/test splits to better respect temporal structure
+- More advanced anomaly detection techniques
+- Feature engineering and categorical variable encoding
+- Alternative predictive models (e.g. tree-based methods)
+
 
    

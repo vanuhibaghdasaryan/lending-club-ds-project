@@ -8,8 +8,11 @@ from src.plotting import (
     plot_issuance_and_default,
     plot_default_by_purpose,
     plot_loan_amount_distribution,
-    plot_default_by_income_quantile
+    plot_default_by_income_quantile,
+    plot_grade_purpose_heatmap,
+    plot_default_rate_with_anomalies
 )
+
 import os
 
 def main():
@@ -25,6 +28,8 @@ def main():
     monthly = monthly_aggregation(df)
     grade_purpose = grade_purpose_aggregation(df)
     monthly = detect_anomalies(monthly)
+    plot_default_rate_with_anomalies(monthly)
+    plot_grade_purpose_heatmap(df)
 
     # Save processed data
     monthly.to_csv("outputs/processed/monthly.csv", index=False)
@@ -41,6 +46,8 @@ def main():
     plot_default_by_purpose(df)
     plot_loan_amount_distribution(df)
     plot_default_by_income_quantile(df)
+    plot_default_rate_with_anomalies(monthly)
+    plot_grade_purpose_heatmap(df)
 
     print("ALL PLOTS CREATED SUCCESSFULLY")
 

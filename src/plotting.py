@@ -108,3 +108,32 @@ def plot_default_by_income_quantile(df):
     plt.tight_layout()
     plt.savefig("outputs/plots/default_by_income.png")
     plt.close()
+
+
+
+def plot_default_rate_with_anomalies(monthly):
+    """
+    Line plot of default_rate over time with anomaly months highlighted.
+    Requires monthly to have columns: year_month, default_rate, anomaly (bool).
+    """
+    plt.figure(figsize=(10, 4))
+    plt.plot(monthly["year_month"], monthly["default_rate"], label="Default Rate")
+
+    if "anomaly" in monthly.columns:
+        anomalies = monthly[monthly["anomaly"] == True]
+        if not anomalies.empty:
+            plt.scatter(
+                anomalies["year_month"],
+                anomalies["default_rate"],
+                label="Anomaly",
+                zorder=3
+            )
+
+    plt.title("Default Rate Over Time (Anomalies Highlighted)")
+    plt.xlabel("Date")
+    plt.ylabel("Default Rate")
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig("outputs/plots/default_rate_anomalies.png", dpi=150)
+    plt.close()
+
