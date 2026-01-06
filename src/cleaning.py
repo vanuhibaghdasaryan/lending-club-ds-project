@@ -39,7 +39,7 @@ def clean_data(df):
     df = df[required_cols].copy()
 
     # Parse date
-    df["issue_d"] = pd.to_datetime(df["issue_d"], errors="coerce")
+    df["issue_d"] = pd.to_datetime(df["issue_d"], format="%b-%Y", errors="coerce")
 
     # Create binary target
     df["default"] = np.where(
