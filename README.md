@@ -136,15 +136,6 @@ Saved in **`outputs/plots/`**, including:
 
 ---
 
-## Notes & Extensions
-
-This project uses a **baseline modeling approach** and a simple anomaly detection method for clarity and interpretability.
-
-Possible extensions include:
-- Time-based train/test splits to better respect temporal structure
-- More advanced anomaly detection techniques
-- Feature engineering and categorical variable encoding
-- Alternative predictive models (e.g. tree-based methods)
 
 
    
